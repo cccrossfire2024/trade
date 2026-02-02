@@ -30,6 +30,9 @@ This inventory covers all `*.py`, `*.bat`, `*.sh`, and `*.md` files.
 | 05_runs/run_train_gate_dev.sh | Linux entry: train Gate | See script | See script | KEEP | Optional |
 | 05_runs/run_train_risk_dev.sh | Linux entry: train Risk | See script | See script | KEEP | Optional |
 | 05_runs/run_backtest_oos.sh | Linux entry: OOS backtest | See script | See script | KEEP | Optional |
+| 05_runs/run_train_gate_dev.bat | Windows entry: train Gate | See script | See script | KEEP | Official entry |
+| 05_runs/run_train_risk_dev.bat | Windows entry: train Risk | See script | See script | KEEP | Official entry |
+| 05_runs/run_backtest_oos.bat | Windows entry: OOS backtest | See script | See script | KEEP | Official entry |
 | 06_diagnose/analyze_gate_v1_vs_v2_blind.py | Gate eval comparison (blind) | Gate samples + gate oos | JSON report | KEEP | Diagnostic tool |
 | 06_diagnose/debug_gate_v1_v2_blind_collapse.py | Gate debug utilities | Gate samples + oos | JSON/prints | KEEP | Diagnostic tool |
 | 06_diagnose/sanity_suite_gate_pipeline.py | Pipeline sanity runner | Multiple datasets/models | Reports | KEEP | Diagnostic tool |
@@ -41,10 +44,14 @@ This inventory covers all `*.py`, `*.bat`, `*.sh`, and `*.md` files.
 | 99_archive/README_DEPRECATED.md | Archive policy | — | — | ARCHIVE | Not an entry point |
 | 99_archive/legacy/build_gate_risk_features_v1plus4.py | Legacy features | Various | Various | ARCHIVE | Superseded by v1 features |
 | 99_archive/legacy/build_position_curve_gate_ml_v1.py | Legacy/duplicate | Various | Various | ARCHIVE | Duplicate of gate training |
+| 99_archive/legacy/build_gate_risk_features_v2.py | Legacy features v2 | Various | Various | ARCHIVE | Superseded by v1 features |
+| 99_archive/legacy/build_position_curve_gate_ml_v1.py | Legacy/duplicate | Various | Various | ARCHIVE | Duplicate of gate training |
+| 99_archive/legacy/build_position_curve_gate_ml_v2.py | Legacy backtest | Various | Various | ARCHIVE | Replaced by `backtest_oos.py` |
 | 99_archive/legacy/build_position_curve_v0.py | Legacy backtest | Gate labels + risk | Curve outputs | ARCHIVE | Replaced by `backtest_oos.py` |
 | 99_archive/legacy/build_position_curve_v1_executor_from_gate_oos.py | Legacy executor | Gate OOS + risk | Curve outputs | ARCHIVE | Replaced by `backtest_oos.py` |
 | 99_archive/legacy/risk_state_machine_v0.py | Legacy risk state machine | Risk bars | Risk states | ARCHIVE | Superseded by v1 |
 | 99_archive/legacy/train_gate_lgbm_wfv.py | Legacy gate WFV | Gate samples | Models + OOS | ARCHIVE | Replaced by `train_gate_dev.py` |
+| 99_archive/legacy/train_gate_lgbm_wfv_v2.py | Legacy gate WFV v2 | Gate samples | Models + OOS | ARCHIVE | Replaced by `train_gate_dev.py` |
 | 99_archive/legacy/infer_gate_blind_from_txt_models.py | Legacy analysis | Gate samples + models | Reports | ARCHIVE | Not baseline |
 | 99_archive/legacy/check.py | Scratch checks | Various | Various | ARCHIVE | Not baseline |
 | 99_archive/experiments/run_all_experiments_gate_risk_v3.py | Full experiment runner | Many datasets | Compare tables | ARCHIVE | Too broad for v1 |
@@ -58,6 +65,11 @@ This inventory covers all `*.py`, `*.bat`, `*.sh`, and `*.md` files.
 | 99_archive/v2_wip/run_blind_step2_features_v2.py | v2 WIP blind features | Various | Various | ARCHIVE | v2 WIP isolated |
 | 99_archive/v2_wip/convert_gate_oos_v2_to_v1.py | v2 conversion | v2 outputs | v1 outputs | ARCHIVE | v2 WIP isolated |
 | 99_archive/v2_wip/make_blind_gate_oos_v2_for_v1.py | v2 conversion | v2 outputs | v1 outputs | ARCHIVE | v2 WIP isolated |
+| 99_archive/experiments/run_blind_step2_features_v2.py | Legacy blind feature build | Various | Various | ARCHIVE | Superseded by v1 features |
+| 99_archive/experiments/run_bnb_xrp_ada_trx_2024_2026.py | One-off run | Various | Various | ARCHIVE | One-off |
+| 99_archive/conversion/convert_gate_oos_v2_to_v1.py | Legacy conversion | v2 outputs | v1 outputs | ARCHIVE | Not baseline |
+| 99_archive/conversion/convert_lgbm_txt_models_to_pkl.py | Model conversion | LGBM txt | pkl | ARCHIVE | Not baseline |
+| 99_archive/conversion/make_blind_gate_oos_v2_for_v1.py | Legacy conversion | v2 outputs | v1 outputs | ARCHIVE | Not baseline |
 | 99_archive/logs/infer_v1_blind.log | Old log | — | — | ARCHIVE | Historical log |
 
 ## DELETE (removed)

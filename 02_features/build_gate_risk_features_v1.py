@@ -3,13 +3,13 @@
 build_gate_risk_features_v1.py
 
 输入：
-- data_clean/universe_long_dev.parquet
-- datasets_v1/gmma_events_dev.parquet
-- datasets_v1/gmma_risk_bars_dev.parquet
+- 01_data/universe_long_all.parquet
+- artifacts/v1/events/gmma_events_dev.parquet
+- artifacts/v1/events/gmma_risk_bars_dev.parquet
 
 输出（out_dir 下）：
-- gate_samples_v1.parquet            # 每事件一行（Gate 训练集 v1）
-- risk_bars_features_v1.parquet      # 事件内 bar 级特征（Risk 数据集 v1）
+- gate_samples.parquet            # 每事件一行（Gate 训练集 v1）
+- risk_bars_features.parquet      # 事件内 bar 级特征（Risk 数据集 v1）
 - summary_features_v1.json
 
 Gate 快照窗口（方案1）：
@@ -214,10 +214,10 @@ def summarize_window(df_feat: pd.DataFrame, t_center: pd.Timestamp, w_pre: int, 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--universe_long_dev", type=str, default="data_clean/universe_long_dev.parquet")
-    ap.add_argument("--events_dev", type=str, default="datasets_v1/gmma_events_dev.parquet")
-    ap.add_argument("--risk_bars_dev", type=str, default="datasets_v1/gmma_risk_bars_dev.parquet")
-    ap.add_argument("--out_dir", type=str, default="datasets_v2")
+    ap.add_argument("--universe_long_dev", type=str, default="01_data/universe_long_all.parquet")
+    ap.add_argument("--events_dev", type=str, default="artifacts/v1/events/gmma_events_dev.parquet")
+    ap.add_argument("--risk_bars_dev", type=str, default="artifacts/v1/events/gmma_risk_bars_dev.parquet")
+    ap.add_argument("--out_dir", type=str, default="artifacts/v1/features")
     ap.add_argument("--w_pre", type=int, default=16)
     ap.add_argument("--w_post", type=int, default=8)
     ap.add_argument("--min_event_bars", type=int, default=0)
@@ -286,7 +286,7 @@ def main():
         gate_rows.append(row)
 
     gate_df = pd.DataFrame(gate_rows)
-    gate_path = out_dir / "gate_samples_v1.parquet"
+    gate_path = out_dir / "gate_samples.parquet"
     gate_df.to_parquet(gate_path, index=False)
 
     # ---- Risk bar features ----
@@ -326,7 +326,7 @@ def main():
         risk_parts.append(merged)
 
     risk_feat = pd.concat(risk_parts, ignore_index=True) if risk_parts else pd.DataFrame()
-    risk_feat_path = out_dir / "risk_bars_features_v1.parquet"
+    risk_feat_path = out_dir / "risk_bars_features.parquet"
     risk_feat.to_parquet(risk_feat_path, index=False)
 
     # ---- Summary ----

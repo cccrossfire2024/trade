@@ -123,8 +123,8 @@ def summarize(long_df: pd.DataFrame) -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--raw_dir", type=str, default="data_raw")
-    ap.add_argument("--out_dir", type=str, default="data_clean")
+    ap.add_argument("--raw_dir", type=str, default="01_data/raw")
+    ap.add_argument("--out_dir", type=str, default="01_data")
     ap.add_argument("--symbols", type=str, nargs="*", default=SYMBOLS_DEFAULT)
     ap.add_argument("--dev_start", type=str, default="2021-01-01 00:00:00+00:00")
     ap.add_argument("--dev_end", type=str, default="2025-01-01 00:00:00+00:00")

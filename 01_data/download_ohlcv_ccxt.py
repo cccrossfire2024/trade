@@ -1,3 +1,4 @@
+import argparse
 import ccxt
 import pandas as pd
 import time
@@ -13,6 +14,8 @@ START_DATE = '2021-01-01 00:00:00'  # UTC
 END_DATE = None  # None 表示拉到最新
 DATA_DIR = '01_data/raw'
 AUDIT_DIR = '01_data/audits'
+EXCHANGE_ID = "binance"
+MARKET_TYPE = "future"
 
 # 代理（可选）
 PROXIES = None
@@ -20,13 +23,15 @@ PROXIES = None
 
 TF_MS = 15 * 60 * 1000
 
-def get_exchange():
-    ex = ccxt.binance({
-        'enableRateLimit': True,
-        'proxies': PROXIES,
-        'options': {
-            'defaultType': 'future',  # USDT-M futures
-        }
+def get_exchange(exchange_id: str, market_type: str):
+    if not hasattr(ccxt, exchange_id):
+        raise ValueError(f"Unknown exchange_id: {exchange_id}")
+    ex = getattr(ccxt, exchange_id)({
+        "enableRateLimit": True,
+        "proxies": PROXIES,
+        "options": {
+            "defaultType": market_type,
+        },
     })
     ex.load_markets()
     return ex
@@ -146,22 +151,33 @@ def safe_name(symbol: str) -> str:
     return symbol.replace("/", "")
 
 def main():
-    os.makedirs(DATA_DIR, exist_ok=True)
-    os.makedirs(AUDIT_DIR, exist_ok=True)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--symbols", nargs="*", default=SYMBOLS)
+    ap.add_argument("--timeframe", type=str, default=TIMEFRAME)
+    ap.add_argument("--start_date", type=str, default=START_DATE)
+    ap.add_argument("--end_date", type=str, default=END_DATE)
+    ap.add_argument("--data_dir", type=str, default=DATA_DIR)
+    ap.add_argument("--audit_dir", type=str, default=AUDIT_DIR)
+    ap.add_argument("--exchange", type=str, default=EXCHANGE_ID)
+    ap.add_argument("--market_type", type=str, default=MARKET_TYPE)
+    args = ap.parse_args()
 
-    ex = get_exchange()
+    os.makedirs(args.data_dir, exist_ok=True)
+    os.makedirs(args.audit_dir, exist_ok=True)
 
-    since_ms = utc_ms(START_DATE)
-    end_ms = utc_ms(END_DATE) if END_DATE else None
+    ex = get_exchange(args.exchange, args.market_type)
 
-    for sym in SYMBOLS:
-        print(f"\n=== Fetch {sym} {TIMEFRAME} (futures) ===")
+    since_ms = utc_ms(args.start_date)
+    end_ms = utc_ms(args.end_date) if args.end_date else None
+
+    for sym in args.symbols:
+        print(f"\n=== Fetch {sym} {args.timeframe} ({args.market_type}) ===")
         # 简单验证：确保 market 存在
         if sym not in ex.markets:
             print(f"[WARN] {sym} not in markets. Available example: {list(ex.markets.keys())[:5]}")
             continue
 
-        data = fetch_ohlcv_all(ex, sym, TIMEFRAME, since_ms, end_ms=end_ms, limit=1000)
+        data = fetch_ohlcv_all(ex, sym, args.timeframe, since_ms, end_ms=end_ms, limit=1000)
         if not data or len(data) < 1000:
             print(f"[WARN] {sym}: too few rows ({0 if not data else len(data)})")
             continue
@@ -169,10 +185,10 @@ def main():
         df = process_to_df(data)
         aud = audit_df(df, sym)
 
-        out_path = os.path.join(DATA_DIR, f"{safe_name(sym)}_{TIMEFRAME}.parquet")
+        out_path = os.path.join(args.data_dir, f"{safe_name(sym)}_{args.timeframe}.parquet")
         df.to_parquet(out_path, engine="pyarrow", compression="snappy")
 
-        aud_path = os.path.join(AUDIT_DIR, f"audit_{safe_name(sym)}_{TIMEFRAME}.json")
+        aud_path = os.path.join(args.audit_dir, f"audit_{safe_name(sym)}_{args.timeframe}.json")
         with open(aud_path, "w", encoding="utf-8") as f:
             json.dump(aud, f, ensure_ascii=False, indent=2)
 

@@ -21,7 +21,7 @@ Gate label（事件级）：
 - datasets_v1/summary_events.json
 
 运行：
-  python extract_gmma_events.py --input_long_dev data_clean\\universe_long_dev.parquet --out_dir datasets_v1
+  python extract_gmma_events.py --input_long_dev 01_data\\universe_long_all.parquet --out_dir artifacts\\v1\\events
 """
 
 import argparse
@@ -255,8 +255,8 @@ def build_risk_bars(df_sym: pd.DataFrame, events: pd.DataFrame, atr_window: int)
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--input_long_dev", type=str, default="data_clean/universe_long_dev.parquet")
-    ap.add_argument("--out_dir", type=str, default="datasets_v1")
+    ap.add_argument("--input_long_dev", type=str, default="01_data/universe_long_all.parquet")
+    ap.add_argument("--out_dir", type=str, default="artifacts/v1/events")
     ap.add_argument("--atr_window", type=int, default=14)
     ap.add_argument("--gate_thr_big", type=float, default=6.0)
     ap.add_argument("--gate_thr_mid", type=float, default=3.0)

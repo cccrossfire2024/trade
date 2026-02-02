@@ -57,6 +57,17 @@ artifacts/v1/   canonical outputs (features / models / backtests)
 
 ---
 
+## One-click pipeline (XRP/TRX/UNI 2024-2026, Linux/macOS)
+
+This pipeline downloads 15m spot OHLCV from **data.binance.vision** (no Binance API),
+builds v1 features/models, runs the OOS backtest, and writes yearly performance reports:
+
+```bash
+05_runs/run_pipeline_xrp_trx_uni_2024_2026.sh
+```
+
+---
+
 ## Official entry scripts
 
 | Entry | What it does | Outputs |

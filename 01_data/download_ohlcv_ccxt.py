@@ -11,8 +11,8 @@ SYMBOLS = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'DOGE/USDT']  # CCXT 通常用这
 TIMEFRAME = '15m'
 START_DATE = '2021-01-01 00:00:00'  # UTC
 END_DATE = None  # None 表示拉到最新
-DATA_DIR = 'data_raw'
-AUDIT_DIR = 'data_raw_audits'
+DATA_DIR = '01_data/raw'
+AUDIT_DIR = '01_data/audits'
 
 # 代理（可选）
 PROXIES = None

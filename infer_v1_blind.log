@@ -1,0 +1,6 @@
+C:\Users\Administrator\Desktop\gpt\infer_gate_blind_from_txt_models.py:156: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  df["ym"] = df["t0_ts"].dt.to_period("M").astype(str)
+[DONE] saved: models_gate_v1\gate_oos_blind_for_v1.parquet
+rows: 1387 features: 129 models: 37
+p_hat nonzero ratio: 1.0000
+pos nonzero ratio: 0.6474

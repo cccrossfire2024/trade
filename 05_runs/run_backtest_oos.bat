@@ -2,7 +2,7 @@
 set ROOT=%~dp0..
 set PY=python
 
-%PY% "%ROOT%\04_backtest\backtest_oos.py" ^
+%PY% "%ROOT%\v1\one_click_backtest_v4_15m_bar_gate_pipeline.py" ^
   --universe_long "%ROOT%\01_data\universe_long_all.parquet" ^
   --risk_states "%ROOT%\artifacts\v1\models\risk\risk_states_full.parquet" ^
   --gate_samples "%ROOT%\artifacts\v1\features\gate_samples.parquet" ^

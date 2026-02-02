@@ -21,6 +21,7 @@
 
 ### Archive
 - `build_gate_risk_features_v1plus4.py` → `99_archive/legacy/build_gate_risk_features_v1plus4.py`
+- `build_position_curve_gate_ml_v1.py` → `99_archive/legacy/build_position_curve_gate_ml_v1.py`
 - `build_gate_risk_features_v2.py` → `99_archive/legacy/build_gate_risk_features_v2.py`
 - `build_position_curve_gate_ml_v1.py` → `99_archive/legacy/build_position_curve_gate_ml_v1.py`
 - `build_position_curve_gate_ml_v2.py` → `99_archive/legacy/build_position_curve_gate_ml_v2.py`
@@ -34,6 +35,18 @@
 - `run_all_experiments_gate_risk_v3.py` → `99_archive/experiments/run_all_experiments_gate_risk_v3.py`
 - `run_experiments_compare.py` → `99_archive/experiments/run_experiments_compare.py`
 - `run_blind_end2end.py` → `99_archive/experiments/run_blind_end2end.py`
+- `run_bnb_xrp_ada_trx_2024_2026.py` → `99_archive/experiments/run_bnb_xrp_ada_trx_2024_2026.py`
+- `convert_lgbm_txt_models_to_pkl.py` → `99_archive/conversion/convert_lgbm_txt_models_to_pkl.py`
+- `infer_v1_blind.log` → `99_archive/logs/infer_v1_blind.log`
+
+### v2 isolation (WIP)
+- `99_archive/legacy/build_gate_risk_features_v2.py` → `99_archive/v2_wip/build_gate_risk_features_v2.py`
+- `99_archive/legacy/build_position_curve_gate_ml_v2.py` → `99_archive/v2_wip/build_position_curve_gate_ml_v2.py`
+- `99_archive/legacy/train_gate_lgbm_wfv_v2.py` → `99_archive/v2_wip/train_gate_lgbm_wfv_v2.py`
+- `99_archive/experiments/run_blind_step2_features_v2.py` → `99_archive/v2_wip/run_blind_step2_features_v2.py`
+- `99_archive/conversion/convert_gate_oos_v2_to_v1.py` → `99_archive/v2_wip/convert_gate_oos_v2_to_v1.py`
+- `99_archive/conversion/make_blind_gate_oos_v2_for_v1.py` → `99_archive/v2_wip/make_blind_gate_oos_v2_for_v1.py`
+
 - `run_blind_step2_features_v2.py` → `99_archive/experiments/run_blind_step2_features_v2.py`
 - `run_bnb_xrp_ada_trx_2024_2026.py` → `99_archive/experiments/run_bnb_xrp_ada_trx_2024_2026.py`
 - `convert_gate_oos_v2_to_v1.py` → `99_archive/conversion/convert_gate_oos_v2_to_v1.py`
